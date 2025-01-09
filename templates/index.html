@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fight Detection Web App</title>
+    <link rel="stylesheet" href="/static/styles.css"> <!-- Link to CSS -->
+</head>
+<body>
+    <header>
+        <h1>Fight Detection Web App</h1>
+        <p>Upload an image to detect if it depicts violent or non-violent activity.</p>
+    </header>
+
+    <main>
+        <div class="image-container">
+            <img src="https://www.shutterstock.com/shutterstock/photos/547510261/display_1500/stock-vector-two-young-boys-fighting-illustration-547510261.jpg" 
+                alt="Fight Example" class="example-image">
+            <img src="https://png.pngtree.com/png-clipart/20190920/original/pngtree-forbidden-fight-cartoon-decoration-png-image_4657047.jpg" 
+                alt="Non-Fight Example" class="example-image">
+        </div>
+
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h2>Prediction: <span class="highlight">{{ prediction }}</span></h2>
+            <h3>Confidence: <span class="highlight">{{ confidence }}</span></h3>
+            <img src="{{ image_path }}" alt="Uploaded Image" class="uploaded-image">
+        </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>Created by <strong>Charishma Barla</strong></p>
+    </footer>
+</body>
+</html>
